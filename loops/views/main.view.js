@@ -76,6 +76,12 @@ function View() {
                 "</div>"
         }
 
+        totalStatDiv +=
+        "<div class='sstContainer'>" +
+            "<div class='medium bold' style='margin-left:18px;margin-top:5px;'>"+ "Total Soulstones:" +"</div>" +
+            "<div id='sst'></div>"
+        "</div>"
+
         statContainer.innerHTML = totalStatDiv;
     };
 
@@ -1133,17 +1139,29 @@ function View() {
     };
 
     this.updateSoulstones = function() {
+        let totalSoulstones = 0;
         for(let i = 0; i < statList.length; i++) {
             let statName = statList[i];
             if(stats[statName].soulstone) {
+                // Single Stat Soulstones
+                totalSoulstones += stats[statName].soulstone
                 document.getElementById("ss" + statName + "Container").style.display = "inline-block";
                 document.getElementById("ss"+statName).textContent = intToString(stats[statName].soulstone, 1);
                 document.getElementById("stat" + statName + "SSBonus").textContent = intToString(stats[statName].soulstone ? calcSoulstoneMult(stats[statName].soulstone) : 0);
                 document.getElementById("stat" + statName + "ss").textContent = intToString(stats[statName].soulstone, 1);
             } else {
+                totalSoulstones += 0
                 document.getElementById("ss" + statName + "Container").style.display = "none";
             }
         }
+        if (totalSoulstones > 0) {
+            // Total Soulstones
+            document.getElementById("sst" + "Container").style.display = "inline-block";
+            document.getElementById("sst").textContent = intToString(totalSoulstones, 1);
+        } else {
+            document.getElementById("sst" + "Container").style.display = "none";
+        }
+
     };
 
     this.updateMultiPart = function(action) {
