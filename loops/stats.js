@@ -144,3 +144,8 @@ function getTotalBonusXP(statName) {
     let soulstoneBonus = stats[statName].soulstone ? calcSoulstoneMult(stats[statName].soulstone) : 1;
     return soulstoneBonus * calcTalentMult(getTalent(statName));
 }
+
+function getTotalSoulstones(statName) {
+    let totalSoulstones = stats[statName].soulstone ? stats[statName].soulstone : 0;
+    return totalSoulstones
+}

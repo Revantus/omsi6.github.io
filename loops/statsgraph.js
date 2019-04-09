@@ -66,21 +66,37 @@ let statGraph = {
                 pointHoverBackgroundColor: "#fff",
                 pointHoverBorderColor: "rgb(255, 180, 91)",
                 tooltipComplement: "%",
+            },
+            {
+                label: _txt("stats>tooltip>soulstone"),
+                data: [],
+                backgroundColor: "rgba(180, 180, 91, 0.2)",
+                borderColor: "rgb(180, 180, 91)",
+                pointBackgroundColor: "rgb(180, 180, 91)",
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: "rgb(180, 180, 91)",
             }
+
         ];
         let highestLevel = 0;
         let highestXP = 0;
+        let highestSoulstones = 0;
         for(let i = 0; i < statList.length; i++) {
             let newLevel = getLevel(statList[i]);
             let newXP = (getTotalBonusXP(statList[i])-1)*100;
+            let newSoulstones = getTotalSoulstones(statList[i])
             if(newLevel > highestLevel) {
                 highestLevel = newLevel;
             }
             if(newXP > highestXP) {
                 highestXP = newXP;
             }
+            if(newSoulstones > highestSoulstones) {
+                highestSoulstones = newSoulstones;
+            }
         }
-        if(highestLevel === 0 || highestXP === 0) {
+        if(highestLevel === 0 || highestXP === 0 || highestSoulstones === 0) {
             radarModifier = 1;
         } else {
             radarModifier = highestLevel / highestXP;
@@ -88,6 +104,7 @@ let statGraph = {
         for (let i = 0; i < statList.length; i++) {
             dataset[0].data.push(getLevel(statList[i]));
             dataset[1].data.push((getTotalBonusXP(statList[i])-1)*100 * radarModifier);
+            dataset[2].data.push(getTotalSoulstones(statList[i]) * radarModifier);
         }
         return dataset;
     },
