@@ -183,7 +183,7 @@ function View() {
             intToString((timeNeeded - timer)/50/getActualGameSpeed(), 2) + _txt("time_controls>seconds");
     };
     this.updateTotalTicks = function() {
-        document.getElementById("totalTicks").textContent = actions.completedTicks + ' | ' + intToString(timeCounter, 2)+ _txt("time_controls>seconds");
+        document.getElementById("totalTicks").textContent = actions.completedTicks + ' | ' + secondsToHMS(intToString(timeCounter, 2))+ _txt("time_controls>seconds");
     };
     this.updateGold = function() {
         document.getElementById("gold").textContent = gold;

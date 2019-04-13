@@ -81,6 +81,12 @@ function intToString (value, amount) {
     }
 }
 
+function secondsToHMS (seconds) {
+    var date = new Date(null);
+    date.setSeconds(SECONDS); // specify value for SECONDS here
+    var result = date.toISOString().substr(11, 8);
+}
+
 function intToStringRound(value) {
     if (value>=10000) {
         return nFormatter(value, 3);
